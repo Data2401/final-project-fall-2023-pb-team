@@ -1,17 +1,29 @@
 ---
 title: "Report"
-output: html_document
-date: "2023-11-15"
+author: "Brenda Ramirez and Priscila Pena"
+date: "DATA 2401"
+output: 
+  slidy_presentation:
+    theme: cosmo
+  html_document:
+    fig_weight: 3
+    fig_width: 4
+    highlight: tango
+    theme: cosmo
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
+library(tidyverse) #Loads data manipulation
 ```
 
-## Intro
+## Introduction
 
 ```{r}
 data <- read.csv("Student_Behaviour.csv")
 glimpse(data)
+```
+
+```{r}
+
 ```
