@@ -1,5 +1,5 @@
 ---
-title: "Report"
+title: "Student's Behavior Report"
 author: "Brenda Ramirez and Priscila Pena"
 date: "DATA 2401"
 output: 
@@ -14,15 +14,39 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse) #Loads data manipulation
+
 ```
 
 ## Introduction
+
+[Student Behavior Data Link](https://www.kaggle.com/datasets/gunapro/student-behavior/data)
+
+This data from Kaggle was collected from various students through a survey. It aims to provide an understanding into student behavior and as current college students we wanted to learn more about what the data has to say about our typical behavior.
+
+## Questions
+
+-   What are the stress levels of students by gender?
+
+-   Is there a relationship between social media usage and their stress level?
+
+-   
+
+## Packages Used
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+```
+
+## Unfiltered Data
 
 ```{r}
 data <- read.csv("Student_Behaviour.csv")
 glimpse(data)
 ```
+
+## Data Key Terms
 
 ```{r}
 
