@@ -34,9 +34,9 @@ This data from Kaggle was collected from various students through a survey. It a
 ## Packages Used
 
 ```{r}
-library(tidyverse)
-library(dplyr)
-library(ggplot2)
+library(tidyverse) #aids in cleaning and presenting data
+library(dplyr) #data manipulation
+library(ggplot2) #data visualization
 ```
 
 ## Unfiltered Data
