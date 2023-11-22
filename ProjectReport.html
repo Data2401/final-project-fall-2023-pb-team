@@ -599,29 +599,42 @@ to say about our typical behavior.</p>
 <li><p>What are the stress levels of students by gender?</p></li>
 <li><p>Is there a relationship between social media usage and their
 stress level?</p></li>
-<li></li>
+<li><p>Do students with a low financial status tend to have higher
+stress levels?</p></li>
+<li><p>Is there a relationship between the type of hobby a student has
+and their college mark?</p></li>
+<li><p>Is there a relationship between students that like their degree
+and their willingness to pursue a career out of it?</p></li>
+<li><p>Are there any students in the data set that have a significantly
+lower salary compared to the rest?</p></li>
+<li><p>What hobby is the most popular among students?</p></li>
+<li><p>What gender tends to have higher academic marks?</p></li>
+<li><p>Do students who perceive themselves to be in a low financial
+situation tend to have a part time job?</p></li>
 </ul>
 </div>
 <div id="packages-used" class="slide section level2">
 <h1>Packages Used</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#aids in cleaning and presenting data</span></span></code></pre></div>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.3.2</code></pre>
+<pre><code>## Warning: package &#39;lubridate&#39; was built under R version 4.3.2</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+## ✔ dplyr     1.1.3     ✔ readr     2.1.4
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-## ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
 ## ✔ purrr     1.0.2     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co">#data manipulation</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#data visualization</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co">#data manipulation</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#data visualization</span></span></code></pre></div>
 </div>
 <div id="unfiltered-data" class="slide section level2">
 <h1>Unfiltered Data</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Student_Behaviour.csv&quot;</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Student_Behaviour.csv&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span></code></pre></div>
 <pre><code>## Rows: 235
 ## Columns: 19
 ## $ Certification.Course                                 &lt;chr&gt; &quot;No&quot;, &quot;No&quot;, &quot;Yes&quot;…

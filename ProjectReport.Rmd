@@ -1,6 +1,6 @@
 ---
 title: "Student's Behavior Report"
-author: "Brenda Ramirez and Priscila Pena"
+author: "Brenda Ramirez & Priscila Pena"
 date: "DATA 2401"
 output: 
   slidy_presentation:
@@ -29,7 +29,19 @@ This data from Kaggle was collected from various students through a survey. It a
 
 -   Is there a relationship between social media usage and their stress level?
 
--   
+-   Do students with a low financial status tend to have higher stress levels?
+
+-   Is there a relationship between the type of hobby a student has and their college mark?
+
+-   Is there a relationship between students that like their degree and their willingness to pursue a career out of it?
+
+-   Are there any students in the data set that have a significantly lower salary compared to the rest?
+
+-   What hobby is the most popular among students?
+
+-   What gender tends to have higher academic marks?
+
+-   Do students who perceive themselves to be in a low financial situation tend to have a part time job?
 
 ## Packages Used
 
