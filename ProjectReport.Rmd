@@ -60,6 +60,40 @@ glimpse(data)
 
 ## Data Key Terms
 
+## What are the stress levels of students by gender?
 ```{r}
 
 ```
+## Is there a relationship between social media usage and their stress level?
+```{r}
+
+```
+## Do students with a low financial status have higher stress levels?
+```{r}
+
+```
+## Is there a relationship between the type of hobby a student has and their college mark?
+```{r}
+
+```
+## Is there a relationship between students that like their degree and their willingness to pursue a career out of it?
+```{r}
+
+```
+## Are there any students in the data set that have a significantly lower salary expectation compared to the rest?
+```{r}
+
+```
+## What hobby is the most popular among students?
+```{r}
+
+```
+## What gender tends to have higher academic marks?
+```{r}
+
+```
+## Do students who perceive themselves to be in a low financial situation tend to have a part time job?
+```{r}
+
+```
+## Summary

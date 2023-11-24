@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Brenda Ramirez and Priscila Pena" />
+  <meta name="author" content="Brenda Ramirez &amp; Priscila Pena" />
   <title>Student’s Behavior Report</title>
   <style type="text/css">
 code{white-space: pre-wrap;}
@@ -580,7 +580,7 @@ list-style-type: none;
 <div class="slide titlepage">
   <h1 class="title">Student’s Behavior Report</h1>
   <p class="author">
-Brenda Ramirez and Priscila Pena
+Brenda Ramirez &amp; Priscila Pena
   </p>
   <p class="date">DATA 2401</p>
 </div>
@@ -618,23 +618,13 @@ situation tend to have a part time job?</p></li>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#aids in cleaning and presenting data</span></span></code></pre></div>
 <pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.3.2</code></pre>
 <pre><code>## Warning: package &#39;lubridate&#39; was built under R version 4.3.2</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.3     ✔ readr     2.1.4
-## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-## ✔ purrr     1.0.2     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co">#data manipulation</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#data visualization</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co">#data manipulation</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#data visualization</span></span></code></pre></div>
 </div>
 <div id="unfiltered-data" class="slide section level2">
 <h1>Unfiltered Data</h1>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Student_Behaviour.csv&quot;</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Student_Behaviour.csv&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span></code></pre></div>
 <pre><code>## Rows: 235
 ## Columns: 19
 ## $ Certification.Course                                 &lt;chr&gt; &quot;No&quot;, &quot;No&quot;, &quot;Yes&quot;…
