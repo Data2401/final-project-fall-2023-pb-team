@@ -35,8 +35,6 @@ This data from Kaggle was collected from various students through a survey. It a
 
 -   Is there a relationship between students that like their degree and their willingness to pursue a career out of it?
 
--   Are there any students in the data set that have a significantly lower salary compared to the rest?
-
 -   What hobby is the most popular among students?
 
 -   What gender tends to have higher academic marks?
@@ -49,6 +47,7 @@ This data from Kaggle was collected from various students through a survey. It a
 library(tidyverse) #aids in cleaning and presenting data
 library(dplyr) #data manipulation
 library(ggplot2) #data visualization
+library(cowplot)
 ```
 
 ## Unfiltered Data
@@ -112,15 +111,7 @@ ggplot(data,
 
 ```
 
-## Are there any students in the data set that have a significantly lower salary expectation compared to the rest?
 
-```{r}
-data %>% select(salary.expectation) %>% arrange(salary.expectation) %>% head(10)
-
-
-
-
-```
 
 ## What hobby is the most popular among students?
 
@@ -130,17 +121,13 @@ ggplot(data, aes(x="", y=hobbies, fill=hobbies)) +
   coord_polar("y", start=0)+
   theme_void()
 ```
-```
-
-
 ## What gender tends to have higher academic marks?
 
 ```{r}
-library(cowplot)
-
 female <- ggplot(data)+geom_col(aes(x=college.mark,y=college.mark, fill = college.mark))
 male <- ggplot(data)+geom_col(aes(x=college.mark,y=college.mark, fill=college.mark))
 plot_grid(female, male, labels=c("females", "males"))
+
 
 ```
 
