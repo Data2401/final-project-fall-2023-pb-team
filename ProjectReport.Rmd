@@ -13,7 +13,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
@@ -43,11 +43,11 @@ This data from Kaggle was collected from various students through a survey. It a
 
 ## Packages Used
 
-```{r}
+```{r echo=TRUE , message=FALSE}
 library(tidyverse) #aids in cleaning and presenting data
 library(dplyr) #data manipulation
 library(ggplot2) #data visualization
-library(cowplot)
+
 ```
 
 ## Unfiltered Data
@@ -69,7 +69,7 @@ Financial Status : economic background or current financial status of the studen
 
 Hobbies : interests of the students
 
-College Mark : grades obtained in their college or university
+College Mark : grades obtained in their college or university \* since its from another country their grade scale is different
 
 Do you like your degree : opinion on whether they like their degree or not
 
@@ -82,51 +82,77 @@ Part-time job : whether or not a student is engaged in one
 ## What are the stress levels of students by gender?
 
 ```{r}
-ggplot(data,
-       mapping = aes(x = Gender, y = Stress.Level, fill = Stress.Level)) + 
-  geom_col()+coord_flip()
+data %>% mutate(Gender = as.factor(Gender)) %>% ggplot(mapping = aes(x = Stress.Level, fill= Gender))+ geom_bar(position = "dodge") + scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink"))+ labs(title = "Stress Level by Gender",
+       x = "Stress Level",
+       y = "Count")
+```
+
+More males than females in this data
+```{r}
+
+data %>% count(Gender)
 ```
 
 ## Is there a relationship between social media usage and their stress level?
 
 ```{r}
 
+ggplot(data, aes(x = Stress.Level, fill = social.medai...video)) + geom_bar(position = "dodge", stat = "count")+ labs(title ="Relationship between Stress Level and Social Media Usage",
+       x = "Stress Level",
+       y = "Count") +
+  scale_fill_manual(values = c("lightblue", "lightgreen", "lightpink", "lightyellow", "lightcoral", "orange")) 
 ```
 
 ## Do students with a low financial status have higher stress levels?
 
 ```{r}
 
+ggplot(data,aes(x = Financial.Status, fill = Stress.Level)) + geom_bar(stat = "count") + labs(title = "Relationship between Financial Status and Stress Level",
+       x = "Financial Status",
+       y = "Count") +
+  scale_fill_manual(values = c("lightblue", "lightgreen", "lightpink", "lightyellow"))
 ```
 
 ## Is there a relationship between the type of hobby a student has and their college mark?
 
 ```{r}
 
+ggplot(data, aes(x = hobbies, y = college.mark, color = hobbies)) + geom_jitter(position = position_jitter(width = 0.2, height = 0.2), alpha = 0.5) + labs(title = "Scatter Plot of College Marks by Hobbies",
+       x = "Hobbies",
+       y = "College Marks")
 ```
 
 ## Is there a relationship between students that like their degree and their willingness to pursue a career out of it?
 
 ```{r}
 
+ggplot(data, aes(x= Do.you.like.your.degree., fill= willingness.to.pursue.a.career.based.on.their.degree)) + geom_bar(position = "dodge", stat = "count") + labs(title = "Relationship between Liking Your Degree and Willingness to Pursue a Career",
+       x = "Do You Like Your Degree?",
+       y = "Count") +
+  scale_fill_manual(values = c("0%" = "lightblue", "100%" = "lightgreen", "25%" = "lightpink", "50%" = "lightyellow", "75%" = "lightcoral"))
+
 ```
-
-
 
 ## What hobby is the most popular among students?
 
 ```{r}
-ggplot(data, aes(x="", y=hobbies, fill=hobbies)) +
-  geom_bar(stat="identity", width=1) +
-  coord_polar("y", start=0)+
-  theme_void()
+
+percentage_data <- data %>% count(hobbies) %>% mutate(percentage = round(n/sum(n)*100))
+
+ggplot(percentage_data,aes(x= "", y = n, fill= hobbies)) + geom_bar(stat="identity", width=1) + geom_text(aes(label = paste0(percentage, "%")), position = position_stack(vjust = 0.5)) + coord_polar("y", start=0)+
+  theme_void() + labs(title = "Distribution of Hobbies",
+       fill = "Hobbies",
+       y = "Percentage")
+
 ```
+
 ## What gender tends to have higher academic marks?
 
 ```{r}
-female <- ggplot(data)+geom_col(aes(x=college.mark,y=college.mark, fill = college.mark))
-male <- ggplot(data)+geom_col(aes(x=college.mark,y=college.mark, fill=college.mark))
-plot_grid(female, male, labels=c("females", "males"))
+ggplot(data, aes(x = Gender, y = college.mark, fill = Gender)) + geom_violin() + labs(title = "College Marks by Gender",
+       x = "Gender",
+       y = "College Marks") +
+  scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink"))
 
 
 ```
@@ -135,6 +161,13 @@ plot_grid(female, male, labels=c("females", "males"))
 
 ```{r}
 
+
+
+ggplot(data, aes(x =  Financial.Status , fill = part.time.job)) + geom_bar(position = "dodge", stat = "count") + labs(title = "Relationship between Financial Status and Part-Time Job",
+       x = "Financial Status",
+       y = "Count") + scale_fill_manual(values = c("Yes" = "lightblue", "No" = "lightcoral")) +
+  coord_flip() 
+  
 ```
 
 ## Summary
