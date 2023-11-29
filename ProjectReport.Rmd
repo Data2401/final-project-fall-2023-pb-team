@@ -82,6 +82,9 @@ Part-time job : whether or not a student is engaged in one
 ## What are the stress levels of students by gender?
 
 ```{r}
+data %>% filter(Stress.Level=="Awful")
+
+
 ggplot(data,
        mapping = aes(x = Gender, y = Stress.Level, fill = Stress.Level)) + 
   geom_col()+coord_flip()
@@ -124,10 +127,10 @@ ggplot(data, aes(x="", y=hobbies, fill=hobbies)) +
 ## What gender tends to have higher academic marks?
 
 ```{r}
-female <- ggplot(data)+geom_col(aes(x=college.mark,y=college.mark, fill = college.mark))
-male <- ggplot(data)+geom_col(aes(x=college.mark,y=college.mark, fill=college.mark))
-plot_grid(female, male, labels=c("females", "males"))
 
+
+
+```{r}
 
 ```
 
