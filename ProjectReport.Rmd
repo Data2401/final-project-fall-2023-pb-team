@@ -79,18 +79,28 @@ Salary expectation : future salary expectations
 
 Part-time job : whether or not a student is engaged in one
 
+## Work in progress
+There are more males in this data set than females
+```{r}
+data %>% count(Gender)
+
+percentage_data <- data %>% count(Gender) %>% mutate(percentage = round(n/sum(n)*100))
+
+ggplot(percentage_data,aes(x= "", y = n, fill= Gender)) + geom_bar(stat="identity", width=1) + geom_text(aes(label = paste0(percentage, "%")), position = position_stack(vjust = 0.5)) + coord_polar("y", start=0)+
+  theme_void() + labs(title = "Percentage of Males and Females in this Data",
+       fill = "Gender",
+       y = "Percentage") + scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink"))
+
+```
+
+
 ## What are the stress levels of students by gender?
 
 ```{r}
 data %>% mutate(Gender = as.factor(Gender)) %>% ggplot(mapping = aes(x = Stress.Level, fill= Gender))+ geom_bar(position = "dodge") + scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink"))+ labs(title = "Stress Level by Gender",
        x = "Stress Level",
        y = "Count")
-```
 
-More males than females in this data
-```{r}
-
-data %>% count(Gender)
 ```
 
 ## Is there a relationship between social media usage and their stress level?
@@ -119,7 +129,7 @@ ggplot(data,aes(x = Financial.Status, fill = Stress.Level)) + geom_bar(stat = "c
 
 ggplot(data, aes(x = hobbies, y = college.mark, color = hobbies)) + geom_jitter(position = position_jitter(width = 0.2, height = 0.2), alpha = 0.5) + labs(title = "Scatter Plot of College Marks by Hobbies",
        x = "Hobbies",
-       y = "College Marks")
+       y = "College Marks") 
 ```
 
 ## Is there a relationship between students that like their degree and their willingness to pursue a career out of it?
@@ -142,7 +152,7 @@ percentage_data <- data %>% count(hobbies) %>% mutate(percentage = round(n/sum(n
 ggplot(percentage_data,aes(x= "", y = n, fill= hobbies)) + geom_bar(stat="identity", width=1) + geom_text(aes(label = paste0(percentage, "%")), position = position_stack(vjust = 0.5)) + coord_polar("y", start=0)+
   theme_void() + labs(title = "Distribution of Hobbies",
        fill = "Hobbies",
-       y = "Percentage")
+       y = "Percentage")+ scale_fill_manual(values = c("lightpink", "lightyellow", "lightblue", "violet"))
 
 ```
 
@@ -171,3 +181,5 @@ ggplot(data, aes(x =  Financial.Status , fill = part.time.job)) + geom_bar(posit
 ```
 
 ## Summary
+
+students come from many distinct backgrounds and cant be fit into a one size fit all mold.  
