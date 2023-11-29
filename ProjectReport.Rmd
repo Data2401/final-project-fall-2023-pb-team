@@ -82,12 +82,7 @@ Part-time job : whether or not a student is engaged in one
 ## What are the stress levels of students by gender?
 
 ```{r}
-data %>% filter(Stress.Level=="Awful")
 
-
-ggplot(data,
-       mapping = aes(x = Gender, y = Stress.Level, fill = Stress.Level)) + 
-  geom_col()+coord_flip()
 ```
 
 ## Is there a relationship between social media usage and their stress level?
@@ -119,10 +114,7 @@ ggplot(data,
 ## What hobby is the most popular among students?
 
 ```{r}
-ggplot(data, aes(x="", y=hobbies, fill=hobbies)) +
-  geom_bar(stat="identity", width=1) +
-  coord_polar("y", start=0)+
-  theme_void()
+
 ```
 ## What gender tends to have higher academic marks?
 
