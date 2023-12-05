@@ -82,65 +82,114 @@ Part-time job : whether or not a student is engaged in one
 ## Difference in gender data
 There are more males in this data set than females
 ```{r}
+
 data %>% count(Gender)
 
 percentage_data <- data %>% count(Gender) %>% mutate(percentage = round(n/sum(n)*100))
 
-ggplot(percentage_data,aes(x= "", y = n, fill= Gender)) + geom_bar(stat="identity", width=1) + geom_text(aes(label = paste0(percentage, "%")), position = position_stack(vjust = 0.5)) + coord_polar("y", start=0)+
-  theme_void() + labs(title = "Percentage of Males and Females in this Data",
-       fill = "Gender",
-       y = "Percentage") + scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink"))
+ggplot(percentage_data, aes(x = Gender, y = percentage, fill = Gender)) + geom_bar(stat = "identity") + geom_text(aes(label = paste0(percentage, "%")), 
+            position = position_stack(vjust = 0.5), 
+            size = 3, 
+            color = "black") +
+  labs(title = "Gender Distribution",
+       x = "Gender",
+       y = "Percentage") +
+  scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink"))
+
 
 ```
 
+
+## Random Male sample
+```{r}
+set.seed(79)
+sample_size <- 79
+
+male_sample <- data %>%
+  filter(Gender == "Male") %>%
+  sample_n(size = sample_size, replace = FALSE) %>%
+  select(Gender, Stress.Level)
+male_sample
+
+```
 
 ## What are the stress levels of students by gender?
 
 ```{r}
 
-data %>% mutate(Gender = as.factor(Gender)) %>% ggplot(mapping = aes(x = Stress.Level, fill= Gender))+ geom_bar(position = "dodge") + scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink"))+ labs(title = "Stress Level by Gender",
+combined_data <- bind_rows(data %>% filter(Gender == "Female"), male_sample %>% mutate(Gender = "Male_Sample"))
+stress_levels_order <- c("Awful", "Bad", "Good", "fabulous")
+combined_data$Stress.Level <- factor(combined_data$Stress.Level, levels = stress_levels_order)
+combined_data %>%
+  mutate(Gender = as.factor(Gender)) %>%
+  ggplot(mapping = aes(x = Stress.Level, fill = Gender)) +
+  geom_bar(position = "dodge", stat = "count") +
+  scale_fill_manual(values = c("Female" = "lightpink", "Male_Sample" = "darkblue")) +
+  labs(title = "Stress Level by Gender",
        x = "Stress Level",
        y = "Count")
+
 
 ```
 
 ## Is there a relationship between social media usage and their stress level?
 
 ```{r}
+social_media_order <- c("0 Minute", "1 - 30 Minute","30 - 60 Minute", "1 - 1.30 hour", "1.30 - 2 hour", "More than 2 hour")
+stress_levels_order <- c("Awful", "Bad", "Good", "fabulous")
 
-ggplot(data, aes(x = Stress.Level, fill = social.medai...video)) + geom_bar(position = "dodge", stat = "count")+ labs(title ="Relationship between Stress Level and Social Media Usage",
+data$Stress.Level <- factor(data$Stress.Level, levels = stress_levels_order)
+data$social.medai...video <- factor(data$social.medai...video, levels = social_media_order)
+
+ggplot(data, aes(x = Stress.Level, fill = social.medai...video)) +
+  geom_bar(position = "dodge", stat = "count") +
+  labs(title = "Relationship between Stress Level and Social Media Usage",
        x = "Stress Level",
        y = "Count") +
-  scale_fill_manual(values = c("lightblue", "lightgreen", "lightpink", "lightyellow", "lightcoral", "orange")) 
+  scale_fill_manual(values = c("0 Minute" = "lightblue", 
+                               "1 - 30 Minute" = "lightgreen", 
+                               "30 - 60 Minute" = "lightpink", 
+                               "1 - 1.30 hour" = "darkblue", 
+                               "1.30 - 2 hour" = "lightcoral", 
+                               "More than 2 hour" = "orange")) +
+  facet_wrap(~social.medai...video, scales = "free_y", ncol = 2)
+
 ```
 
 ## Do students with a low financial status have higher stress levels?
 
 ```{r}
-
-ggplot(data,aes(x = Financial.Status, fill = Stress.Level)) + geom_bar(stat = "count") + labs(title = "Relationship between Financial Status and Stress Level",
+ggplot(data, aes(x = Financial.Status, fill = Stress.Level)) +
+  geom_bar(stat = "count") +
+  labs(title = "Relationship between Financial Status and Stress Level",
        x = "Financial Status",
        y = "Count") +
-  scale_fill_manual(values = c("lightblue", "lightgreen", "lightpink", "lightyellow"))
+  scale_fill_manual(values = c("Awful" = "lightblue", "Bad" = "lightgreen", "Good" = "lightpink", "Fabulous" = "darkblue")) +
+  facet_wrap(~Stress.Level)
+
 ```
 
 ## Is there a relationship between the type of hobby a student has and their college mark?
 
 ```{r}
-
-ggplot(data, aes(x = hobbies, y = college.mark, color = hobbies)) + geom_jitter(position = position_jitter(width = 0.2, height = 0.2), alpha = 0.5) + labs(title = "Scatter Plot of College Marks by Hobbies",
+ggplot(data, aes(x = hobbies, y = college.mark, fill = hobbies)) +
+  geom_boxplot(alpha = 0.5) +  # Use alpha for transparency
+  labs(title = "Boxplot of College Marks by Hobbies",
        x = "Hobbies",
-       y = "College Marks") 
+       y = "College Marks")
 ```
 
 ## Is there a relationship between students that like their degree and their willingness to pursue a career out of it?
 
 ```{r}
 
-ggplot(data, aes(x= Do.you.like.your.degree., fill= willingness.to.pursue.a.career.based.on.their.degree)) + geom_bar(position = "dodge", stat = "count") + labs(title = "Relationship between Liking Your Degree and Willingness to Pursue a Career",
+ggplot(data, aes(x = Do.you.like.your.degree., fill = willingness.to.pursue.a.career.based.on.their.degree)) +
+  geom_bar(position = "dodge", stat = "count") +
+  labs(title = "Relationship between Liking Your Degree and Willingness to Pursue a Career",
        x = "Do You Like Your Degree?",
        y = "Count") +
-  scale_fill_manual(values = c("0%" = "lightblue", "100%" = "lightgreen", "25%" = "lightpink", "50%" = "lightyellow", "75%" = "lightcoral"))
+  scale_fill_manual(values = c("0%" = "lightblue", "100%" = "lightgreen", "25%" = "lightpink", "50%" = "lightyellow", "75%" = "lightcoral"), breaks = c("0%", "25%", "50%", "75%", "100%")) +
+  facet_wrap(~Do.you.like.your.degree., scales = "free_x", ncol = 1)
 
 ```
 
@@ -149,11 +198,14 @@ ggplot(data, aes(x= Do.you.like.your.degree., fill= willingness.to.pursue.a.care
 ```{r}
 percentage_data <- data %>% count(hobbies) %>% mutate(percentage = round(n/sum(n)*100))
 
-ggplot(percentage_data,aes(x= "", y = n, fill= hobbies)) + geom_bar(stat="identity", width=1) + geom_text(aes(label = paste0(percentage, "%")), position = position_stack(vjust = 0.5)) + coord_polar("y", start=0)+
-  theme_void() + labs(title = "Distribution of Hobbies",
-       fill = "Hobbies",
-       y = "Percentage")+ scale_fill_manual(values = c("lightpink", "lightyellow", "lightblue", "violet"))
-
+ggplot(percentage_data, aes(x = reorder(hobbies, -percentage), y = percentage, fill = hobbies)) +
+  geom_bar(stat = "identity", width = 0.8) +
+  geom_text(aes(label = paste0(percentage, "%")), vjust = -0.5) +
+  theme_minimal() +
+  labs(title = "Distribution of Hobbies",
+       x = "Hobbies",
+       y = "Percentage") +
+  scale_fill_manual(values = c("lightpink", "darkblue", "lightblue", "violet"))
 ```
 
 ## What gender tends to have higher academic marks?  
@@ -162,7 +214,7 @@ ggplot(percentage_data,aes(x= "", y = n, fill= hobbies)) + geom_bar(stat="identi
 ggplot(data, aes(x = Gender, y = college.mark, fill = Gender)) + geom_violin() + labs(title = "College Marks by Gender",
        x = "Gender",
        y = "College Marks") +
-  scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink"))
+  scale_fill_manual(values = c("Male" = "lightblue", "Female" = "lightpink")) + coord_flip()
 
 ```
 
@@ -170,11 +222,15 @@ ggplot(data, aes(x = Gender, y = college.mark, fill = Gender)) + geom_violin() +
 
 ```{r}
 
-ggplot(data, aes(x =  Financial.Status , fill = part.time.job)) + geom_bar(position = "dodge", stat = "count") + labs(title = "Relationship between Financial Status and Part-Time Job",
-       x = "Financial Status",
-       y = "Count") + scale_fill_manual(values = c("Yes" = "lightblue", "No" = "lightcoral")) +
-  coord_flip() 
-  
+ggplot(data, aes(x =part.time.job , fill = part.time.job)) +
+  geom_bar(position = "dodge", stat = "count") +
+  labs(title = "Relationship between Financial Status and Part-Time Job",
+       x = "Part-Time Job",
+       y = "Count") +
+  scale_fill_manual(values = c("Yes" = "lightblue", "No" = "lightcoral")) +
+  coord_flip() +
+  facet_wrap(~Financial.Status)
+
 ```
 
 ## Summary
