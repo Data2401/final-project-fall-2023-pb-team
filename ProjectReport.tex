@@ -1,0 +1,542 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Student's Behavior Report},
+  pdfauthor={Brenda Ramirez \& Priscila Pena},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Student's Behavior Report}
+\author{Brenda Ramirez \& Priscila Pena}
+\date{DATA 2401}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Introduction}
+\protect\hypertarget{introduction}{}
+\href{https://www.kaggle.com/datasets/gunapro/student-behavior/data}{Student
+Behavior Data Link}
+
+Do students from a different country have a similar college experience
+as you? An individual's college experience tends to be incredibly unique
+and dependent on many personal factors. However, are there some
+similarities or differences in student behavior from other countries
+such as India? The dataset \emph{Student Behavior, Understanding
+Students: Behaviors, Preferences, and Expectations} is a collection of
+insight into the behaviors and characteristics of different college
+students from India.~
+
+We didn't have much information on the data origins but we were still
+very interested to see if these students had a similar college
+experience as us and if there were any interesting patterns among them.
+We used values such as stress level, gender, social media engagement,
+financial status, hobbies, college marks, degree satisfaction,
+willingness to pursue a career, salary expectation, and whether the
+student had a part-time job or not. After filtering the raw data, we
+dove into finding the relationships between stress levels and gender,
+the correlation between gender and academic marks and patterns among
+financial situations and the number of students who had part-time jobs
+while in university among other questions.~
+\end{frame}
+
+\begin{frame}{Questions}
+\protect\hypertarget{questions}{}
+\begin{itemize}
+\item
+  What are the stress levels of students by gender?
+\item
+  Is there a relationship between social media usage and their stress
+  level?
+\item
+  Do students with a low financial status tend to have higher stress
+  levels?
+\item
+  Is there a relationship between the type of hobby a student has and
+  their college mark?
+\item
+  Is there a relationship between students that like their degree and
+  their willingness to pursue a career out of it?
+\item
+  What hobby is the most popular among students?
+\item
+  What gender tends to have higher academic marks?
+\item
+  Do students who perceive themselves to be in a low financial situation
+  tend to have a part time job?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Packages Used}
+\protect\hypertarget{packages-used}{}
+Our project only required us to use 3 packages: \emph{tidyverse} for
+cleaning and presenting data, \emph{dplyr} for data manipulation, and
+\emph{ggplot} for data visualization.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\#aids in cleaning and presenting data}
+\FunctionTok{library}\NormalTok{(dplyr) }\CommentTok{\#data manipulation}
+\FunctionTok{library}\NormalTok{(ggplot2) }\CommentTok{\#data visualization}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Unfiltered Data}
+\protect\hypertarget{unfiltered-data}{}
+This data set from Kaggle "Student Behavior" was collected from students
+through a survey in Chennai, India. At first glance, you can see that
+the data we are working with is mainly categorical with only a few
+exceptions to this. We can tell that we will be working with discrete
+data.~
+
+\begin{verbatim}
+## Rows: 235
+## Columns: 19
+## $ Certification.Course                                 <chr> "No", "No", "Yes"~
+## $ Gender                                               <chr> "Male", "Female",~
+## $ Department                                           <chr> "BCA", "BCA", "BC~
+## $ Height.CM.                                           <dbl> 100, 90, 159, 147~
+## $ Weight.KG.                                           <dbl> 58, 40, 78, 20, 5~
+## $ X10th.Mark                                           <dbl> 79.0, 70.0, 69.5,~
+## $ X12th.Mark                                           <dbl> 65.00, 80.00, 61.~
+## $ college.mark                                         <dbl> 80, 70, 55, 58, 3~
+## $ hobbies                                              <chr> "Video Games", "C~
+## $ daily.studing.time                                   <chr> "0 - 30 minute", ~
+## $ prefer.to.study.in                                   <chr> "Morning", "Morni~
+## $ salary.expectation                                   <int> 40000, 15000, 130~
+## $ Do.you.like.your.degree.                             <chr> "No", "Yes", "Yes~
+## $ willingness.to.pursue.a.career.based.on.their.degree <chr> "50%", "75%", "50~
+## $ social.medai...video                                 <chr> "1.30 - 2 hour", ~
+## $ Travelling.Time                                      <chr> "30 - 60 minutes"~
+## $ Stress.Level                                         <chr> "Bad", "Bad", "Aw~
+## $ Financial.Status                                     <chr> "Bad", "Bad", "Ba~
+## $ part.time.job                                        <chr> "No", "No", "No",~
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Data Key Terms}
+\protect\hypertarget{data-key-terms}{}
+Stress Level : perceived stress level of the student
+
+Gender
+
+Social Media \& Video : engagement with these platforms
+
+Financial Status : economic background or current financial status of
+the student
+
+Hobbies : interests of the students
+
+College Mark : grades obtained in their college or university * since
+its from another country their grade scale is different
+
+Do you like your degree : opinion on whether they like their degree or
+not
+
+Willingness to pursue a career based on their degree : a percentage of
+that likeliness
+
+Salary expectation : future salary expectations
+
+Part-time job : whether or not a student is engaged in one
+\end{frame}
+
+\begin{frame}[fragile]{Difference in gender data}
+\protect\hypertarget{difference-in-gender-data}{}
+When we first tackled this question we noticed a large gap in our data
+between the genders. There were more males than females by almost double
+the amount. We knew this would have a significant effect on our findings
+so we decided to take a random sample of males in this data. Our first
+task was to visualize the ratio between men and women surveyed. We first
+turned the counts of the original data for each gender to find 79 female
+and 156 male students were surveyed. Then, we turned these numbers into
+percentages to show the overall distribution. Finally, we used a bar
+chart to contrast the percentages of each gender category and found the
+male data almost doubled the female. 34\% of students were female and
+66\% were male.
+
+\begin{verbatim}
+##   Gender   n
+## 1 Female  79
+## 2   Male 156
+\end{verbatim}
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-3-1.pdf}
+\end{frame}
+
+\begin{frame}[fragile]{Random Male Sample}
+\protect\hypertarget{random-male-sample}{}
+Since we found that our data was skewed due to the male data almost
+doubling the amount of female data, we created a random male sample
+proportional to that of the women. To do this, we created a new variable
+"male sample" in which we randomly sampled 79 male students to equal the
+amount of female data. This way our male-to-female visualizations would
+be proportional and this sample fixes the issue of a skewed dataset.
+
+\begin{verbatim}
+##    Gender Stress.Level
+## 1    Male         Good
+## 2    Male         Good
+## 3    Male         Good
+## 4    Male        Awful
+## 5    Male         Good
+## 6    Male     fabulous
+## 7    Male         Good
+## 8    Male        Awful
+## 9    Male          Bad
+## 10   Male          Bad
+## 11   Male     fabulous
+## 12   Male         Good
+## 13   Male         Good
+## 14   Male         Good
+## 15   Male          Bad
+## 16   Male          Bad
+## 17   Male         Good
+## 18   Male         Good
+## 19   Male         Good
+## 20   Male          Bad
+## 21   Male          Bad
+## 22   Male         Good
+## 23   Male          Bad
+## 24   Male         Good
+## 25   Male        Awful
+## 26   Male          Bad
+## 27   Male          Bad
+## 28   Male         Good
+## 29   Male          Bad
+## 30   Male        Awful
+## 31   Male        Awful
+## 32   Male         Good
+## 33   Male         Good
+## 34   Male         Good
+## 35   Male         Good
+## 36   Male          Bad
+## 37   Male          Bad
+## 38   Male         Good
+## 39   Male         Good
+## 40   Male     fabulous
+## 41   Male         Good
+## 42   Male          Bad
+## 43   Male         Good
+## 44   Male        Awful
+## 45   Male          Bad
+## 46   Male         Good
+## 47   Male     fabulous
+## 48   Male         Good
+## 49   Male         Good
+## 50   Male         Good
+## 51   Male         Good
+## 52   Male         Good
+## 53   Male         Good
+## 54   Male         Good
+## 55   Male         Good
+## 56   Male         Good
+## 57   Male         Good
+## 58   Male        Awful
+## 59   Male         Good
+## 60   Male         Good
+## 61   Male         Good
+## 62   Male         Good
+## 63   Male     fabulous
+## 64   Male          Bad
+## 65   Male         Good
+## 66   Male         Good
+## 67   Male         Good
+## 68   Male          Bad
+## 69   Male          Bad
+## 70   Male         Good
+## 71   Male          Bad
+## 72   Male         Good
+## 73   Male        Awful
+## 74   Male          Bad
+## 75   Male         Good
+## 76   Male          Bad
+## 77   Male         Good
+## 78   Male          Bad
+## 79   Male          Bad
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{What are the stress levels of students by gender?}
+\protect\hypertarget{what-are-the-stress-levels-of-students-by-gender}{}
+To visualize the stress levels by gender, we created a new variable to
+combine data from 2 sources, the original data and the male sample we
+created. We then mutated the gender column so that it could use the male
+sample instead of the original. Finally, we created a grouped bar graph
+to show the comparison between the 2 genders and the different stress
+levels.
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-5-1.pdf}
+
+The stress levels between students are very close to one another. There
+are however slight differences such as more men feel they have awful and
+fabulous stress levels. Additionally, more female students had both bad
+and good stress levels than men. This data doesn't have much of a
+pattern so we can't say that stress level is influenced by gender based
+on this data. Overall, based on these findings, students of both genders
+do not suffer from high-stress levels.
+\end{frame}
+
+\begin{frame}{Is there a relationship between social media usage and
+their stress level?}
+\protect\hypertarget{is-there-a-relationship-between-social-media-usage-and-their-stress-level}{}
+To find this relationship, we created 2 new variables based on social
+media and student stress levels to organize the order of the values of
+each category. Next, we used a facet wrap to create separate facets for
+each category of social media usage. This made it easier to compare and
+contrast stress level distributions within each social media usage
+category.
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-6-1.pdf}
+
+We were expecting to see lower stress levels from students who used the
+least amount of social media and higher stress levels if they spent more
+than 2 hours on it. We were very surprised to find that most students
+with low stress levels spend around 1-30 minutes, 30-60 minutes, or
+1-1.30 hours on social media. These students did spend lower periods on
+social media, but students with the worst stress levels, seem to not
+have used social media as much as we would've thought.
+\end{frame}
+
+\begin{frame}{Do students with a low financial status have higher stress
+levels?}
+\protect\hypertarget{do-students-with-a-low-financial-status-have-higher-stress-levels}{}
+We once again used a facet wrap to find the relationship between a
+student's financial status and their stress levels. We were expecting to
+find higher stress levels for students who had a lower financial status.
+Stress levels seem to be similarly bad regardless if a student has a
+good or bad financial status. However, we found that these students'
+stress levels are overall low despite their financial status.
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-7-1.pdf}
+\end{frame}
+
+\begin{frame}{Is there a relationship between the type of hobby a
+student has and their college mark?}
+\protect\hypertarget{is-there-a-relationship-between-the-type-of-hobby-a-student-has-and-their-college-mark}{}
+For this relationship, we used a box plot to summarize the distribution
+of college marks based on hobby preference. There were a couple of
+outliers in our data, for example 3 very low marks from students who
+prefer to read books and overall lower marks from students who play
+sports. However, the range of college marks stays between 50-100\% no
+matter what type of hobby the student prefers.
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-8-1.pdf}
+\end{frame}
+
+\begin{frame}{Is there a relationship between students that like their
+degree and their willingness to pursue a career out of it?}
+\protect\hypertarget{is-there-a-relationship-between-students-that-like-their-degree-and-their-willingness-to-pursue-a-career-out-of-it}{}
+We used a facet wrap again here. We based it on whether students liked
+their degree or not along with the percentage of willingness a student
+has to pursue a career based on that degree. We found that the majority
+of students who liked their degree were more willing to pursue a career
+based on their degree. However, it was interesting to find that there
+are a couple of students who are still pursuing a particular career
+despite not liking it.
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-9-1.pdf}
+\end{frame}
+
+\begin{frame}{What hobby is the most popular among students?}
+\protect\hypertarget{what-hobby-is-the-most-popular-among-students}{}
+We chose a bar graph to show which hobby is the most popular among
+students. We created a new variable to show the percentage count of each
+hobby and used geom\_text to add the labels at the top of the bars. This
+graph is also organized in descending percentage order so the most
+popular hobby is easier to spot. 15\% of students prefer to read books,
+another 15\% like video games, 33\% chose cinema and 36\% chose
+sports.~We can assume that sports were the most popular in this data
+because of the abundance of males in the data
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-10-1.pdf}
+\end{frame}
+
+\begin{frame}{What gender tends to have higher academic marks?}
+\protect\hypertarget{what-gender-tends-to-have-higher-academic-marks}{}
+To find which gender has higher academic marks, we used a violin plot to
+see the shape and density of the distribution. We then flipped the
+graphs so that it was easier to compare them.Most marks range around the
+80\textquotesingle s. We found that women tend to have higher academic
+marks with a higher minimum and higher maximum. Men tend to have a lower
+max and a lower minimum that goes all the way down to 0\%. Their marks
+are also below average ranging in the 70 \%s.
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-11-1.pdf}
+\end{frame}
+
+\begin{frame}{Do students who perceive themselves to be in a low
+financial situation tend to have a part time job?}
+\protect\hypertarget{do-students-who-perceive-themselves-to-be-in-a-low-financial-situation-tend-to-have-a-part-time-job}{}
+We also approached this question with a facet wrap.
+
+\includegraphics{ProjectReport_files/figure-beamer/unnamed-chunk-12-1.pdf}
+
+You would think that more students would have part-time jobs if their
+financial situation is not very good, but in this data, we see that the
+majority of students do not have a part-time job. The amount of students
+that work is about the same regardless if their financial status is good
+or bad. Even though they have a bad financial situation, because
+they\textquotesingle re students, they don't seem to start working right
+away.
+\end{frame}
+
+\begin{frame}{Summary}
+\protect\hypertarget{summary}{}
+Based on our data manipulation and visualization in this data set these
+are some of the things we were able to conclude. we found a positive
+relationship between the number of students who like their degrees and
+their willingness to pursue a career out of it. We also found that women
+tend to have higher marks than men. A student's stress levels may not be
+directly influenced by their gender, their social media use, or their
+financial status. The type of hobby a student chooses also did not
+affect the type of academic marks they received. Because they are still
+students, their financial status does not define if they have a
+part-time job or not. A lot of our original hypotheses were proven wrong
+with our data findings. We concluded that since students come from many
+distinct backgrounds and live in different situations, you can't assume
+that students' college experiences are going to be the same. You can't
+fit college students into a one-size-fits-all mold.~
+\end{frame}
+
+\end{document}

@@ -2,7 +2,7 @@
 title: "Student's Behavior Report"
 author: "Brenda Ramirez & Priscila Pena"
 date: "DATA 2401"
-output: 
+output:
   slidy_presentation:
     theme: journal
   html_document:
@@ -10,6 +10,10 @@ output:
     fig_width: 4
     highlight: tango
     theme: cosmo
+  ioslides_presentation:
+    highlight: tango
+  beamer_presentation:
+    highlight: tango
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +25,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 [Student Behavior Data Link](https://www.kaggle.com/datasets/gunapro/student-behavior/data)
 
-This data from Kaggle was collected from various students through a survey. It aims to provide an understanding into student behavior and as current college students we wanted to learn more about what the data has to say about our typical behavior.
+Do students from a different country have a similar college experience as you? An individual's college experience tends to be incredibly unique and dependent on many personal factors. However, are there some similarities or differences in student behavior from other countries such as India? The dataset *Student Behavior, Understanding Students: Behaviors, Preferences, and Expectations* is a collection of insight into the behaviors and characteristics of different college students from India. 
+
+We didn't have much information on the data origins but we were still very interested to see if these students had a similar college experience as us and if there were any interesting patterns among them. We used values such as stress level, gender, social media engagement, financial status, hobbies, college marks, degree satisfaction, willingness to pursue a career, salary expectation, and whether the student had a part-time job or not. After filtering the raw data, we dove into finding the relationships between stress levels and gender, the correlation between gender and academic marks and patterns among financial situations and the number of students who had part-time jobs while in university among other questions. 
 
 ## Questions
 
@@ -43,6 +49,8 @@ This data from Kaggle was collected from various students through a survey. It a
 
 ## Packages Used
 
+Our project only required us to use 3 packages: *tidyverse* for cleaning and presenting data, *dplyr* for data manipulation, and *ggplot* for data visualization.
+
 ```{r echo=TRUE , message=FALSE}
 library(tidyverse) #aids in cleaning and presenting data
 library(dplyr) #data manipulation
@@ -51,6 +59,8 @@ library(ggplot2) #data visualization
 ```
 
 ## Unfiltered Data
+
+This data set from Kaggle \"Student Behavior\" was collected from students through a survey in Chennai, India. At first glance, you can see that the data we are working with is mainly categorical with only a few exceptions to this. We can tell that we will be working with discrete data. 
 
 ```{r}
 data <- read.csv("Student_Behaviour.csv")
@@ -80,7 +90,9 @@ Salary expectation : future salary expectations
 Part-time job : whether or not a student is engaged in one
 
 ## Difference in gender data
-There are more males in this data set than females
+
+When we first tackled this question we noticed a large gap in our data between the genders. There were more males than females by almost double the amount. We knew this would have a significant effect on our findings so we decided to take a random sample of males in this data. Our first task was to visualize the ratio between men and women surveyed. We first turned the counts of the original data for each gender to find 79 female and 156 male students were surveyed. Then, we turned these numbers into percentages to show the overall distribution. Finally, we used a bar chart to contrast the percentages of each gender category and found the male data almost doubled the female. 34% of students were female and 66% were male.
+
 ```{r}
 
 data %>% count(Gender)
@@ -99,8 +111,10 @@ ggplot(percentage_data, aes(x = Gender, y = percentage, fill = Gender)) + geom_b
 
 ```
 
+## Random Male Sample
 
-## Random Male sample
+Since we found that our data was skewed due to the male data almost doubling the amount of female data, we created a random male sample proportional to that of the women. To do this, we created a new variable \"male sample\" in which we randomly sampled 79 male students to equal the amount of female data. This way our male-to-female visualizations would be proportional and this sample fixes the issue of a skewed dataset.
+
 ```{r}
 set.seed(79)
 sample_size <- 79
@@ -114,6 +128,8 @@ male_sample
 ```
 
 ## What are the stress levels of students by gender?
+
+To visualize the stress levels by gender, we created a new variable to combine data from 2 sources, the original data and the male sample we created. We then mutated the gender column so that it could use the male sample instead of the original. Finally, we created a grouped bar graph to show the comparison between the 2 genders and the different stress levels.
 
 ```{r}
 
@@ -132,7 +148,11 @@ combined_data %>%
 
 ```
 
+The stress levels between students are very close to one another. There are however slight differences such as more men feel they have awful and fabulous stress levels. Additionally, more female students had both bad and good stress levels than men. This data doesn't have much of a pattern so we can't say that stress level is influenced by gender based on this data. Overall, based on these findings, students of both genders do not suffer from high-stress levels.
+
 ## Is there a relationship between social media usage and their stress level?
+
+To find this relationship, we created 2 new variables based on social media and student stress levels to organize the order of the values of each category. Next, we used a facet wrap to create separate facets for each category of social media usage. This made it easier to compare and contrast stress level distributions within each social media usage category.
 
 ```{r}
 social_media_order <- c("0 Minute", "1 - 30 Minute","30 - 60 Minute", "1 - 1.30 hour", "1.30 - 2 hour", "More than 2 hour")
@@ -156,7 +176,11 @@ ggplot(data, aes(x = Stress.Level, fill = social.medai...video)) +
 
 ```
 
+We were expecting to see lower stress levels from students who used the least amount of social media and higher stress levels if they spent more than 2 hours on it. We were very surprised to find that most students with low stress levels spend around 1-30 minutes, 30-60 minutes, or 1-1.30 hours on social media. These students did spend lower periods on social media, but students with the worst stress levels, seem to not have used social media as much as we would've thought.
+
 ## Do students with a low financial status have higher stress levels?
+
+We once again used a facet wrap to find the relationship between a student's financial status and their stress levels. We were expecting to find higher stress levels for students who had a lower financial status. Stress levels seem to be similarly bad regardless if a student has a good or bad financial status. However, we found that these students' stress levels are overall low despite their financial status.
 
 ```{r}
 ggplot(data, aes(x = Financial.Status, fill = Stress.Level)) +
@@ -171,6 +195,8 @@ ggplot(data, aes(x = Financial.Status, fill = Stress.Level)) +
 
 ## Is there a relationship between the type of hobby a student has and their college mark?
 
+For this relationship, we used a box plot to summarize the distribution of college marks based on hobby preference. There were a couple of outliers in our data, for example 3 very low marks from students who prefer to read books and overall lower marks from students who play sports. However, the range of college marks stays between 50-100% no matter what type of hobby the student prefers.
+
 ```{r}
 ggplot(data, aes(x = hobbies, y = college.mark, fill = hobbies)) +
   geom_boxplot(alpha = 0.5) +  # Use alpha for transparency
@@ -180,6 +206,8 @@ ggplot(data, aes(x = hobbies, y = college.mark, fill = hobbies)) +
 ```
 
 ## Is there a relationship between students that like their degree and their willingness to pursue a career out of it?
+
+We used a facet wrap again here. We based it on whether students liked their degree or not along with the percentage of willingness a student has to pursue a career based on that degree. We found that the majority of students who liked their degree were more willing to pursue a career based on their degree. However, it was interesting to find that there are a couple of students who are still pursuing a particular career despite not liking it.
 
 ```{r}
 
@@ -195,6 +223,8 @@ ggplot(data, aes(x = Do.you.like.your.degree., fill = willingness.to.pursue.a.ca
 
 ## What hobby is the most popular among students?
 
+We chose a bar graph to show which hobby is the most popular among students. We created a new variable to show the percentage count of each hobby and used geom_text to add the labels at the top of the bars. This graph is also organized in descending percentage order so the most popular hobby is easier to spot. 15% of students prefer to read books, another 15% like video games, 33% chose cinema and 36% chose sports. We can assume that sports were the most popular in this data because of the abundance of males in the data
+
 ```{r}
 percentage_data <- data %>% count(hobbies) %>% mutate(percentage = round(n/sum(n)*100))
 
@@ -208,7 +238,9 @@ ggplot(percentage_data, aes(x = reorder(hobbies, -percentage), y = percentage, f
   scale_fill_manual(values = c("lightpink", "darkblue", "lightblue", "violet"))
 ```
 
-## What gender tends to have higher academic marks?  
+## What gender tends to have higher academic marks? 
+
+To find which gender has higher academic marks, we used a violin plot to see the shape and density of the distribution. We then flipped the graphs so that it was easier to compare them.Most marks range around the 80\'s. We found that women tend to have higher academic marks with a higher minimum and higher maximum. Men tend to have a lower max and a lower minimum that goes all the way down to 0%. Their marks are also below average ranging in the 70 %s.
 
 ```{r}
 ggplot(data, aes(x = Gender, y = college.mark, fill = Gender)) + geom_violin() + labs(title = "College Marks by Gender",
@@ -219,6 +251,8 @@ ggplot(data, aes(x = Gender, y = college.mark, fill = Gender)) + geom_violin() +
 ```
 
 ## Do students who perceive themselves to be in a low financial situation tend to have a part time job?
+
+We also approached this question with a facet wrap.
 
 ```{r}
 
@@ -233,10 +267,8 @@ ggplot(data, aes(x =part.time.job , fill = part.time.job)) +
 
 ```
 
+You would think that more students would have part-time jobs if their financial situation is not very good, but in this data, we see that the majority of students do not have a part-time job. The amount of students that work is about the same regardless if their financial status is good or bad. Even though they have a bad financial situation, because they\'re students, they don't seem to start working right away.
+
 ## Summary
 
-We found a positive relationship between the number of students who like their degrees and their willingness to pursue a career out of it. Women tend to have higher marks than men.
-
-A student's stress levels may not be directly influenced by their gender, their social media use, or their financial status. The type of hobby a student chooses also did not seem to affect the type of academic marks they received. Because they are still students, their financial status does not define if they have a part-time job.
-
-Students come from many distinct backgrounds and can't fit into a one-size-fits-all mold.
+Based on our data manipulation and visualization in this data set these are some of the things we were able to conclude. we found a positive relationship between the number of students who like their degrees and their willingness to pursue a career out of it. We also found that women tend to have higher marks than men. A student's stress levels may not be directly influenced by their gender, their social media use, or their financial status. The type of hobby a student chooses also did not affect the type of academic marks they received. Because they are still students, their financial status does not define if they have a part-time job or not. A lot of our original hypotheses were proven wrong with our data findings. We concluded that since students come from many distinct backgrounds and live in different situations, you can't assume that students' college experiences are going to be the same. You can't fit college students into a one-size-fits-all mold. 
