@@ -2,18 +2,7 @@
 title: "Student's Behavior Report"
 author: "Brenda Ramirez & Priscila Pena"
 date: "DATA 2401"
-output:
-  slidy_presentation:
-    theme: journal
-  html_document:
-    fig_weight: 3
-    fig_width: 4
-    highlight: tango
-    theme: cosmo
-  ioslides_presentation:
-    highlight: tango
-  beamer_presentation:
-    highlight: tango
+output : html_document
 ---
 
 ```{r setup, include=FALSE}
